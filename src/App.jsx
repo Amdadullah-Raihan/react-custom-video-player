@@ -1,5 +1,11 @@
+import VideoPlayer from "./modules/player/pages/VideoPlayer";
+
 function App() {
-  return <main></main>;
+  return (
+    <main>
+      <VideoPlayer />
+    </main>
+  );
 }
 
 export default App;
