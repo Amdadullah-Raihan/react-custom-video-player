@@ -1,10 +1,8 @@
-import VideoPlayer from "./modules/player/pages/VideoPlayer";
-
 function App() {
   return (
-    <main>
-      <VideoPlayer />
-    </main>
+    <>
+      <h1 className="text-red-500">React Custom Video Player</h1>
+    </>
   );
 }
 
