@@ -14,10 +14,14 @@ const VideoPlayer = () => {
     }
   };
   return (
-    <div className="rounded-lg overflow-hidden ">
-      <div>
+    <div className="group relative rounded-lg overflow-hidden ">
+      <div
+        className={`absolute w-full text-white px-2 pt-5 pb-1 bottom-0 bg-gradient-to-t from-black  transition ${
+          isPlaying ? "opacity-0 group-hover:opacity-100 " : ""
+        } `}
+      >
         <button onClick={togglePlay}>
-          {isPlaying ? (
+          {!isPlaying ? (
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
