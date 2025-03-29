@@ -29,10 +29,10 @@ const VideoPlayer = () => {
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="lucide lucide-play-icon lucide-play"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="lucide lucide-play-icon lucide-play"
             >
               <polygon points="6 3 20 12 6 21 6 3" />
             </svg>
@@ -44,10 +44,10 @@ const VideoPlayer = () => {
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="lucide lucide-pause-icon lucide-pause"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="lucide lucide-pause-icon lucide-pause"
             >
               <rect x="14" y="4" width="4" height="16" rx="1" />
               <rect x="6" y="4" width="4" height="16" rx="1" />
