@@ -13,10 +13,20 @@ const VideoPlayer = () => {
       setIsPlaying(false);
     }
   };
+
+  const title = `JavaScript Basics (Variables, functions, events, DOM manipulation).
+`;
   return (
-    <div className="group relative rounded-lg overflow-hidden ">
+    <div className="relative overflow-hidden text-white rounded-lg group ">
       <div
-        className={`absolute w-full text-white px-2 pt-5 pb-1 bottom-0 bg-gradient-to-t from-black  transition ${
+        className={`w-full absolute top-0 left-0  px-4 pt-2 pb-6 bg-gradient-to-b from-black transition  z-50 ${
+          isPlaying ? "opacity-0 group-hover:opacity-100 " : ""
+        } `}
+      >
+        <p className="text-lg font-bold">{title}</p>
+      </div>
+      <div
+        className={`absolute w-full  px-2 pt-5 pb-1 bottom-0 bg-gradient-to-t from-black  transition  z-50 ${
           isPlaying ? "opacity-0 group-hover:opacity-100 " : ""
         } `}
       >
