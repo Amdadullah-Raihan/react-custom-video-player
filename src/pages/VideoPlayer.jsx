@@ -151,8 +151,8 @@ const VideoPlayer = () => {
           </svg>
         </button>
         <div>
-          <p>
-            <span>{formatTime(videoRef?.current?.currentTime)}</span>/{" "}
+          <p className="">
+            <span>{formatTime(videoRef?.current?.currentTime)}</span> /{" "}
             <span>{formatTime(videoRef?.current?.duration)}</span>
           </p>
         </div>
