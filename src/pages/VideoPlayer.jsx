@@ -96,7 +96,7 @@ const VideoPlayer = () => {
               width="24"
               height="24"
               viewBox="0 0 24 24"
-              fill="none"
+              fill="white"
               stroke="currentColor"
               strokeWidth="2"
               strokeLinecap="round"
@@ -111,15 +111,15 @@ const VideoPlayer = () => {
               width="24"
               height="24"
               viewBox="0 0 24 24"
-              fill="none"
+              fill="white"
               stroke="currentColor"
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
               className="lucide lucide-pause-icon lucide-pause"
             >
-              <rect x="14" y="4" width="4" height="16" rx="1" />
-              <rect x="6" y="4" width="4" height="16" rx="1" />
+              <rect x="5" y="4" width="4" height="16" rx="1" />
+              <rect x="15" y="4" width="4" height="16" rx="1" />
             </svg>
           )}
         </button>
@@ -131,7 +131,7 @@ const VideoPlayer = () => {
             width="24"
             height="24"
             viewBox="0 0 24 24"
-            fill="none"
+            fill="white"
             stroke="currentColor"
             stroke-width="2"
             stroke-linecap="round"
@@ -153,7 +153,7 @@ const VideoPlayer = () => {
             width="24"
             height="24"
             viewBox="0 0 24 24"
-            fill="none"
+            fill="white"
             stroke="currentColor"
             stroke-width="2"
             stroke-linecap="round"
@@ -176,7 +176,7 @@ const VideoPlayer = () => {
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
-                fill="none"
+                fill="white"
                 stroke="currentColor"
                 stroke-width="2"
                 stroke-linecap="round"
@@ -195,7 +195,7 @@ const VideoPlayer = () => {
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
-                fill="none"
+                fill="white"
                 stroke="currentColor"
                 stroke-width="2"
                 stroke-linecap="round"
