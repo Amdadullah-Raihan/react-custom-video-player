@@ -8,6 +8,8 @@ const VideoPlayer = () => {
   const [showTimeInRemaining, setShowTimeInRemaining] = useState(false);
 
   const [videoDuration, setVideoDuration] = useState(0);
+  const [currentTime, setCurrentTime] = useState(0);
+
   const videoRef = useRef(null);
   const skipTime = 5; // Skip forward/backward in seconds
 
@@ -34,6 +36,12 @@ const VideoPlayer = () => {
       videoRef.current.pause();
     }
     setIsPlaying(!isPlaying);
+  };
+
+  const handleTimeUpdate = () => {
+    if (videoRef.current) {
+      setCurrentTime(videoRef.current.currentTime);
+    }
   };
 
   const handleFastForward = () => {
@@ -193,17 +201,11 @@ const VideoPlayer = () => {
           className="p-1 px-2 transition rounded-lg cursor-pointer hover:bg-sky-500"
         >
           {showTimeInRemaining ? (
-            <span>
-              -
-              {formatTime(
-                videoRef?.current?.duration - videoRef?.current?.currentTime ||
-                  0
-              )}
-            </span>
+            <span>-{formatTime(videoDuration - currentTime || 0)}</span>
           ) : (
-            <span>{formatTime(videoRef?.current?.currentTime || 0)}</span>
-          )}
-          / <span>{formatTime(videoRef?.current?.duration || 0)}</span>
+            <span>{formatTime(currentTime || 0)}</span>
+          )}{" "}
+          / <span>{formatTime(videoDuration || 0)}</span>
         </p>
 
         <div className="flex items-center gap-2 ml-6">
@@ -323,6 +325,7 @@ const VideoPlayer = () => {
         src={video}
         className="w-full"
         download="false"
+        onTimeUpdate={handleTimeUpdate}
       ></video>
     </div>
   );
