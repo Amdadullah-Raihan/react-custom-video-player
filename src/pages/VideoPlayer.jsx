@@ -164,12 +164,15 @@ const VideoPlayer = () => {
             <line x1="19" x2="19" y1="5" y2="19" />
           </svg>
         </button>
-        <p className="">
+        <p className="p-1 px-2 transition rounded-lg cursor-pointer hover:bg-sky-500">
           <span>{formatTime(videoRef?.current?.currentTime)}</span> /{" "}
           <span>{formatTime(videoRef?.current?.duration)}</span>
         </p>
         <div className="flex items-center gap-2 ml-6">
-          <button onClick={handleMute}>
+          <button
+            onClick={handleMute}
+            className="p-1 transition rounded-lg hover:bg-sky-500"
+          >
             {isMuted ? (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -212,56 +215,62 @@ const VideoPlayer = () => {
         </div>
 
         <div className="flex items-center gap-3 ml-auto">
-          <p className="font-bold">1x</p>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="lucide lucide-picture-in-picture2-icon lucide-picture-in-picture-2"
-          >
-            <path d="M21 9V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v10c0 1.1.9 2 2 2h4" />
-            <rect width="10" height="7" x="12" y="13" rx="2" />
-          </svg>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="lucide lucide-minimize-icon lucide-minimize"
-          >
-            <path d="M8 3v3a2 2 0 0 1-2 2H3" />
-            <path d="M21 8h-3a2 2 0 0 1-2-2V3" />
-            <path d="M3 16h3a2 2 0 0 1 2 2v3" />
-            <path d="M16 21v-3a2 2 0 0 1 2-2h3" />
-          </svg>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="lucide lucide-maximize-icon lucide-maximize"
-          >
-            <path d="M8 3H5a2 2 0 0 0-2 2v3" />
-            <path d="M21 8V5a2 2 0 0 0-2-2h-3" />
-            <path d="M3 16v3a2 2 0 0 0 2 2h3" />
-            <path d="M16 21h3a2 2 0 0 0 2-2v-3" />
-          </svg>
+          <p className="p-1 px-2 font-bold transition rounded-lg cursor-pointer hover:bg-sky-500">
+            1x
+          </p>
+          <button className="p-1 transition rounded-lg cursor-pointer hover:bg-sky-500">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-picture-in-picture2-icon lucide-picture-in-picture-2"
+            >
+              <path d="M21 9V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v10c0 1.1.9 2 2 2h4" />
+              <rect width="10" height="7" x="12" y="13" rx="2" />
+            </svg>
+          </button>
+          <button className="p-1 px-2 transition rounded-lg cursor-pointer hover:bg-sky-500">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-minimize-icon lucide-minimize"
+            >
+              <path d="M8 3v3a2 2 0 0 1-2 2H3" />
+              <path d="M21 8h-3a2 2 0 0 1-2-2V3" />
+              <path d="M3 16h3a2 2 0 0 1 2 2v3" />
+              <path d="M16 21v-3a2 2 0 0 1 2-2h3" />
+            </svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-maximize-icon lucide-maximize"
+            >
+              <path d="M8 3H5a2 2 0 0 0-2 2v3" />
+              <path d="M21 8V5a2 2 0 0 0-2-2h-3" />
+              <path d="M3 16v3a2 2 0 0 0 2 2h3" />
+              <path d="M16 21h3a2 2 0 0 0 2-2v-3" />
+            </svg>
+          </button>
         </div>
       </div>
       <video
