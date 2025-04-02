@@ -5,6 +5,7 @@ const VideoPlayer = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [showTimeInRemaining, setShowTimeInRemaining] = useState(false);
 
   const [videoDuration, setVideoDuration] = useState(0);
   const videoRef = useRef(null);
@@ -176,10 +177,24 @@ const VideoPlayer = () => {
             <line x1="19" x2="19" y1="5" y2="19" />
           </svg>
         </button>
-        <p className="p-1 px-2 transition rounded-lg cursor-pointer hover:bg-sky-500">
-          <span>{formatTime(videoRef?.current?.currentTime)}</span> /{" "}
-          <span>{formatTime(videoRef?.current?.duration)}</span>
+        <p
+          onClick={() => setShowTimeInRemaining(!showTimeInRemaining)}
+          className="p-1 px-2 transition rounded-lg cursor-pointer hover:bg-sky-500"
+        >
+          {showTimeInRemaining ? (
+            <span>
+              -
+              {formatTime(
+                videoRef?.current?.duration - videoRef?.current?.currentTime ||
+                  0
+              )}
+            </span>
+          ) : (
+            <span>{formatTime(videoRef?.current?.currentTime || 0)}</span>
+          )}
+          / <span>{formatTime(videoRef?.current?.duration || 0)}</span>
         </p>
+
         <div className="flex items-center gap-2 ml-6">
           <button
             onClick={handleMute}
