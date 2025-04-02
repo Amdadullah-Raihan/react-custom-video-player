@@ -116,15 +116,17 @@ const VideoPlayer = () => {
       >
         {/* Timeline Bar */}
         <div
-          className="absolute left-0 z-50 h-1 ml-2 bg-gray-200 rounded cursor-pointer top-11"
+          className="absolute left-0 z-50 h-[0.35rem]  ml-2 transition-[height] bg-gray-200 rounded cursor-pointer top-11 "
           style={{ width: "calc(100% - 1rem)" }}
           onClick={handleSeek} // 🔥 Allow seeking
         >
           {/* Progress Indicator */}
           <div
-            className="h-full transition-all rounded bg-sky-500"
+            className="relative h-full transition-all rounded bg-sky-500 group"
             style={{ width: `${(currentTime / videoDuration) * 100}%` }}
-          ></div>
+          >
+            <div className="absolute w-3 h-3 transition-all -translate-x-1/2 -translate-y-1/2 bg-sky-500 border-[4px]  shadow  rounded-full left-full top-1/2 scale-0 group-hover:scale-100 duration-300" />
+          </div>
         </div>
         <button
           onClick={togglePlay}
