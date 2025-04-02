@@ -41,7 +41,17 @@ const VideoPlayer = () => {
 
     const newTime = Math.min(
       videoRef.current.currentTime + skipTime,
-      videoDuration
+      videoRef.current.duration // Ensure we don't exceed duration
+    );
+    videoRef.current.currentTime = newTime;
+  };
+
+  const handleFastBackward = () => {
+    if (!videoRef.current) return;
+
+    const newTime = Math.max(
+      videoRef.current.currentTime - skipTime,
+      0 // Ensure we don't go below 0
     );
     videoRef.current.currentTime = newTime;
   };
@@ -136,7 +146,10 @@ const VideoPlayer = () => {
         </button>
 
         {/* Fast Backward */}
-        <button className="p-1 transition rounded-lg hover:bg-sky-500">
+        <button
+          onClick={handleFastBackward}
+          className="p-1 transition rounded-lg hover:bg-sky-500"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
