@@ -30,11 +30,10 @@ const VideoPlayer = () => {
 
     if (videoRef.current.paused) {
       videoRef.current.play();
-      setIsPlaying(true);
     } else {
       videoRef.current.pause();
-      setIsPlaying(false);
     }
+    setIsPlaying(!isPlaying);
   };
 
   const handleFastForward = () => {
@@ -52,11 +51,10 @@ const VideoPlayer = () => {
 
     if (videoRef?.current?.muted) {
       videoRef.current.muted = false;
-      setIsMuted(false);
     } else {
       videoRef.current.muted = true;
-      setIsMuted(true);
     }
+    setIsMuted(!isMuted);
   };
 
   const toggleFullScreen = () => {
