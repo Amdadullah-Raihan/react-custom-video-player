@@ -5,7 +5,6 @@ import SkipButton from "./SkipButton";
 import VolumeButton from "./VolumeButton";
 import FullscreenButton from "./FullscreenButton";
 import PiPButton from "./PiPButton";
-import RangeInput from "../components/RangeInput";
 
 const VideoPlayer = () => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -173,7 +172,7 @@ const VideoPlayer = () => {
         {/* Timeline Bar */}
         <div
           ref={timelineRef}
-          className="absolute left-0 z-50 h-[0.35rem]  ml-2 transition-[height] bg-gray-200 rounded cursor-pointer top-11 "
+          className="absolute left-0 z-50 h-[0.3rem]  ml-2 transition-[height] bg-gray-300 rounded cursor-pointer top-1 "
           style={{ width: "calc(100% - 1rem)" }}
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}
@@ -197,7 +196,7 @@ const VideoPlayer = () => {
           onClick={togglePlay}
           className="p-1 transition rounded-lg hover:bg-sky-500"
         >
-          <PlayPauseButton isPlaying={isPlaying} />
+          <PlayPauseButton isPlaying={isPlaying} size={18} />
         </button>
 
         {/* Skip Backward Button */}
@@ -205,7 +204,7 @@ const VideoPlayer = () => {
           onClick={handleRewind}
           className="p-1 transition rounded-lg hover:bg-sky-500"
         >
-          <SkipButton direction="backward" />
+          <SkipButton direction="backward" size={18} />
         </button>
         {/* Skip Forward Button */}
 
@@ -213,7 +212,7 @@ const VideoPlayer = () => {
           onClick={handleFastForward}
           className="p-1 transition rounded-lg hover:bg-sky-500"
         >
-          <SkipButton direction="forward" />
+          <SkipButton direction="forward" size={18} />
         </button>
         <p
           onClick={() => setShowTimeInRemaining(!showTimeInRemaining)}
@@ -231,20 +230,20 @@ const VideoPlayer = () => {
             onClick={handleMute}
             className="p-1 transition rounded-lg hover:bg-sky-500"
           >
-            <VolumeButton isMuted={isMuted} />
+            <VolumeButton isMuted={isMuted} size={18} />
           </button>
-          <input type="range" name="" id="" />
+          <input type="range" name="" id="" className="h-[0.3rem] max-w-20" />
         </div>
         <div className="flex items-center gap-3 ml-auto">
           <p className="p-1 px-2 font-bold transition rounded-lg cursor-pointer hover:bg-sky-500">
             1x
           </p>
-          <PiPButton videoRef={videoRef} />
+          <PiPButton videoRef={videoRef} size={18} />
           <button
             onClick={toggleFullScreen}
             className="p-1 transition rounded-lg cursor-pointer hover:bg-sky-500"
           >
-            <FullscreenButton isFullscreen={isFullscreen} />
+            <FullscreenButton isFullscreen={isFullscreen} size={18} />
           </button>
         </div>
       </div>
