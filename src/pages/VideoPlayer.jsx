@@ -5,6 +5,7 @@ import SkipButton from "./SkipButton";
 import VolumeButton from "./VolumeButton";
 import FullscreenButton from "./FullscreenButton";
 import PiPButton from "./PiPButton";
+import RangeInput from "../components/RangeInput";
 
 const VideoPlayer = () => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -12,6 +13,7 @@ const VideoPlayer = () => {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [showTimeInRemaining, setShowTimeInRemaining] = useState(false);
   const [timelineWidth, setTimelineWidth] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
 
   const [videoDuration, setVideoDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
@@ -99,6 +101,28 @@ const VideoPlayer = () => {
     const newTime = (percentageClicked / 100) * videoDuration;
 
     videoRef.current.currentTime = newTime;
+    setCurrentTime(newTime);
+  };
+
+  const handleMouseDown = (e) => {
+    setIsDragging(true);
+    handleSeek(e);
+  };
+
+  const handleMouseMove = (e) => {
+    if (isDragging) {
+      handleSeek(e);
+    }
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  const handleMouseLeave = () => {
+    if (isDragging) {
+      setIsDragging(false);
+    }
   };
 
   const formatTime = (time) => {
@@ -151,14 +175,22 @@ const VideoPlayer = () => {
           ref={timelineRef}
           className="absolute left-0 z-50 h-[0.35rem]  ml-2 transition-[height] bg-gray-200 rounded cursor-pointer top-11 "
           style={{ width: "calc(100% - 1rem)" }}
-          onClick={handleSeek} // 🔥 Allow seeking
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseLeave}
+          onClick={handleSeek}
         >
           {/* Progress Indicator */}
           <div
             className="relative w-full h-full rounded bg-sky-500 group"
             style={{ width: `${(currentTime / videoDuration) * 100}%` }}
           >
-            <div className="absolute w-3 h-3 transition-all -translate-x-1/2 -translate-y-1/2 bg-sky-500 border-[4px]  shadow  rounded-full left-full top-1/2 scale-0 group-hover:scale-100 duration-500" />
+            <div
+              className={`absolute w-3 h-3 transition-all -translate-x-1/2 -translate-y-1/2 bg-sky-500 border-[4px]  shadow  rounded-full left-full top-1/2 scale-0  duration-500 ${
+                isDragging ? "scale-150" : " group-hover:scale-100"
+              }`}
+            />
           </div>
         </div>
         <button
