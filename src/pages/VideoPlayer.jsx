@@ -135,7 +135,7 @@ const VideoPlayer = () => {
           {/* Progress Indicator */}
           <div
             ref={timelineRef}
-            className="relative w-full h-full transition-all rounded bg-sky-500 group"
+            className="relative w-full h-full rounded bg-sky-500 group"
             style={{ width: `${(currentTime / videoDuration) * 100}%` }}
           >
             <div className="absolute w-3 h-3 transition-all -translate-x-1/2 -translate-y-1/2 bg-sky-500 border-[4px]  shadow  rounded-full left-full top-1/2 scale-0 group-hover:scale-100 duration-300" />
