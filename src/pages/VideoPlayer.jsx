@@ -86,14 +86,18 @@ const VideoPlayer = () => {
   };
 
   const handleSeek = (e) => {
-    if (!timelineRef?.current) return;
+    if (!timelineRef?.current || !videoRef?.current || timelineWidth === 0)
+      return;
 
     const { left } = timelineRef.current.getBoundingClientRect();
-
     const clickX = e.clientX - left;
-    const percentageClicked = (clickX / timelineWidth) * 100;
 
+    // Ensure clickX is within bounds
+    const safeClickX = Math.max(0, Math.min(clickX, timelineWidth));
+
+    const percentageClicked = (safeClickX / timelineWidth) * 100;
     const newTime = (percentageClicked / 100) * videoDuration;
+
     videoRef.current.currentTime = newTime;
   };
 
@@ -144,13 +148,13 @@ const VideoPlayer = () => {
       >
         {/* Timeline Bar */}
         <div
+          ref={timelineRef}
           className="absolute left-0 z-50 h-[0.35rem]  ml-2 transition-[height] bg-gray-200 rounded cursor-pointer top-11 "
           style={{ width: "calc(100% - 1rem)" }}
           onClick={handleSeek} // 🔥 Allow seeking
         >
           {/* Progress Indicator */}
           <div
-            ref={timelineRef}
             className="relative w-full h-full rounded bg-sky-500 group"
             style={{ width: `${(currentTime / videoDuration) * 100}%` }}
           >
