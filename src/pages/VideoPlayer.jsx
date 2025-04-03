@@ -107,9 +107,21 @@ const VideoPlayer = () => {
   };
 
   useEffect(() => {
-    if (timelineRef.current) {
-      setTimelineWidth(timelineRef.current.offsetWidth);
-    }
+    const updateTimelineWidth = () => {
+      if (timelineRef.current) {
+        setTimelineWidth(timelineRef.current.offsetWidth);
+      }
+    };
+
+    // Set initial width
+    updateTimelineWidth();
+
+    // Listen for window resize
+    window.addEventListener("resize", updateTimelineWidth);
+
+    return () => {
+      window.removeEventListener("resize", updateTimelineWidth);
+    };
   }, []);
 
   const title = `JavaScript Basics (Variables, functions, events, DOM manipulation).
