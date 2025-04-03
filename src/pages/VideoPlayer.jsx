@@ -118,13 +118,17 @@ const VideoPlayer = () => {
     <div className="relative overflow-hidden text-white rounded-lg group ">
       <div
         className={`w-full absolute top-0 left-0  px-4 pt-2 pb-16 bg-gradient-to-b from-black/80 via-black/60 to-transparent
- transition  z-50 ${isPlaying ? "opacity-0 group-hover:opacity-100 " : ""} `}
+ transition duration-500  z-50 ${
+   isPlaying ? "opacity-0 group-hover:opacity-100 " : ""
+ } `}
       >
         <p className="text-lg font-bold">{title}</p>
       </div>
       <div
         className={`absolute w-full flex items-center gap-2  px-2 pt-16 pb-2 bottom-0 bg-gradient-to-t from-black/80 via-black/60 to-transparent
- transition  z-40 ${isPlaying ? "opacity-0 group-hover:opacity-100 " : ""} `}
+ transition duration-500  z-40 ${
+   isPlaying ? "opacity-0 group-hover:opacity-100 " : ""
+ } `}
       >
         {/* Timeline Bar */}
         <div
@@ -138,7 +142,7 @@ const VideoPlayer = () => {
             className="relative w-full h-full rounded bg-sky-500 group"
             style={{ width: `${(currentTime / videoDuration) * 100}%` }}
           >
-            <div className="absolute w-3 h-3 transition-all -translate-x-1/2 -translate-y-1/2 bg-sky-500 border-[4px]  shadow  rounded-full left-full top-1/2 scale-0 group-hover:scale-100 duration-300" />
+            <div className="absolute w-3 h-3 transition-all -translate-x-1/2 -translate-y-1/2 bg-sky-500 border-[4px]  shadow  rounded-full left-full top-1/2 scale-0 group-hover:scale-100 duration-500" />
           </div>
         </div>
         <button
