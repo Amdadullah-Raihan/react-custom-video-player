@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import video from "../assets/test video.mp4";
 import PlayPauseButton from "./PlayPauseButton";
 import SkipButton from "./SkipButton";
@@ -11,11 +11,13 @@ const VideoPlayer = () => {
   const [isMuted, setIsMuted] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [showTimeInRemaining, setShowTimeInRemaining] = useState(false);
+  const [timelineWidth, setTimelineWidth] = useState(0);
 
   const [videoDuration, setVideoDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
 
   const videoRef = useRef(null);
+  const timelineRef = useRef(null);
   const skipTime = 10; // Skip forward/backward in seconds
 
   const handleLoadedMetadata = () => {
@@ -23,7 +25,6 @@ const VideoPlayer = () => {
       setVideoDuration(videoRef.current.duration);
     }
   };
-  console.log("is muted?", videoRef?.current?.muted);
 
   const togglePlay = () => {
     if (!videoRef.current) return;
@@ -85,9 +86,14 @@ const VideoPlayer = () => {
   };
 
   const handleSeek = (e) => {
-    if (!videoRef.current) return;
-    const newTime =
-      (e.nativeEvent.offsetX / e.target.offsetWidth) * videoDuration;
+    if (!timelineRef?.current) return;
+
+    const { left } = timelineRef.current.getBoundingClientRect();
+
+    const clickX = e.clientX - left;
+    const percentageClicked = (clickX / timelineWidth) * 100;
+
+    const newTime = (percentageClicked / 100) * videoDuration;
     videoRef.current.currentTime = newTime;
   };
 
@@ -99,6 +105,12 @@ const VideoPlayer = () => {
 
     return `${minutes}:${seconds.toString().padStart(2, "0")}`;
   };
+
+  useEffect(() => {
+    if (timelineRef.current) {
+      setTimelineWidth(timelineRef.current.offsetWidth);
+    }
+  }, []);
 
   const title = `JavaScript Basics (Variables, functions, events, DOM manipulation).
 `;
@@ -122,7 +134,8 @@ const VideoPlayer = () => {
         >
           {/* Progress Indicator */}
           <div
-            className="relative h-full transition-all rounded bg-sky-500 group"
+            ref={timelineRef}
+            className="relative w-full h-full transition-all rounded bg-sky-500 group"
             style={{ width: `${(currentTime / videoDuration) * 100}%` }}
           >
             <div className="absolute w-3 h-3 transition-all -translate-x-1/2 -translate-y-1/2 bg-sky-500 border-[4px]  shadow  rounded-full left-full top-1/2 scale-0 group-hover:scale-100 duration-300" />
