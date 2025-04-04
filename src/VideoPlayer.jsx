@@ -1,14 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
-import video from "../assets/test video.mp4";
-import PlayPauseButton from "../components/PlayPauseButton";
-import SkipButton from "../components/SkipButton";
-import VolumeButton from "../components/VolumeButton";
-import FullscreenButton from "../components/FullscreenButton";
-import PiPButton from "../components/PiPButton";
-import RangeSlider from "../components/RangeSlider";
-import PlaybackRateControl from "../components/PlaybackRateControl";
+import PlayPauseButton from "./components/PlayPauseButton";
+import SkipButton from "./components/SkipButton";
+import VolumeButton from "./components/VolumeButton";
+import FullscreenButton from "./components/FullscreenButton";
+import PiPButton from "./components/PiPButton";
+import RangeSlider from "./components/RangeSlider";
+import PlaybackRateControl from "./components/PlaybackRateControl";
 
-const VideoPlayer = ({ title = "", skipTime = 10 }) => {
+const VideoPlayer = ({ title = "", skipTime = 10, src }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -206,7 +205,7 @@ const VideoPlayer = ({ title = "", skipTime = 10 }) => {
       <video
         ref={videoRef}
         onClick={togglePlay}
-        src={video}
+        src={src}
         className="w-full"
         download="false"
         onTimeUpdate={handleTimeUpdate}
