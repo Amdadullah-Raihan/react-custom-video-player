@@ -105,6 +105,7 @@ const VideoPlayer = () => {
 `;
   return (
     <div className="relative overflow-hidden text-white rounded-lg group ">
+      {/* Upper Title Part */}
       <div
         className={`w-full absolute top-0 left-0  px-4 pt-2 pb-16 bg-gradient-to-b from-black/80 via-black/60 to-transparent
  transition duration-500  z-50 ${
@@ -113,6 +114,8 @@ const VideoPlayer = () => {
       >
         <p className="text-lg font-bold">{title}</p>
       </div>
+
+      {/* Bottom Controls Part */}
       <div
         className={`absolute w-full flex items-center gap-2  px-2 pt-16 pb-2 bottom-0 bg-gradient-to-t from-black/80 via-black/60 to-transparent
  transition duration-500  z-40 ${
@@ -129,6 +132,7 @@ const VideoPlayer = () => {
           />
         </div>
 
+        {/* Play/Pause Button */}
         <button
           onClick={togglePlay}
           className="p-1 transition rounded-lg hover:bg-sky-500"
@@ -143,17 +147,19 @@ const VideoPlayer = () => {
         >
           <SkipButton direction="backward" size={18} />
         </button>
-        {/* Skip Forward Button */}
 
+        {/* Skip Forward Button */}
         <button
           onClick={handleFastForward}
           className="p-1 transition rounded-lg hover:bg-sky-500"
         >
           <SkipButton direction="forward" size={18} />
         </button>
+
+        {/* Current Time/Toltal Time || Remaining Time/Total Time */}
         <p
           onClick={() => setShowTimeInRemaining(!showTimeInRemaining)}
-          className="p-1 px-2 transition rounded-lg cursor-pointer hover:bg-sky-500"
+          className="p-1 px-2 transition rounded-lg cursor-pointer select-none hover:bg-sky-500"
         >
           {showTimeInRemaining ? (
             <span>-{formatTime(videoDuration - currentTime || 0)}</span>
@@ -162,6 +168,8 @@ const VideoPlayer = () => {
           )}{" "}
           / <span>{formatTime(videoDuration || 0)}</span>
         </p>
+
+        {/* Volume Control */}
         <div className="flex items-center gap-2 ml-6">
           <button
             onClick={handleMute}
@@ -180,6 +188,8 @@ const VideoPlayer = () => {
             />
           </div>
         </div>
+
+        {/* PiP & Full Screen Controll */}
         <div className="flex items-center gap-3 ml-auto">
           <p className="p-1 px-2 font-bold transition rounded-lg cursor-pointer hover:bg-sky-500">
             1x
@@ -193,6 +203,7 @@ const VideoPlayer = () => {
           </button>
         </div>
       </div>
+
       <video
         ref={videoRef}
         onClick={togglePlay}
