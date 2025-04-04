@@ -8,7 +8,7 @@ import PiPButton from "../components/PiPButton";
 import RangeSlider from "../components/RangeSlider";
 import PlaybackRateControl from "../components/PlaybackRateControl";
 
-const VideoPlayer = () => {
+const VideoPlayer = ({ title = "", skipTime = 10 }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -19,8 +19,6 @@ const VideoPlayer = () => {
   const [volume, setVolume] = useState(1);
 
   const videoRef = useRef(null);
-
-  const skipTime = 10; // Skip forward/backward in seconds
 
   const handleLoadedMetadata = () => {
     if (videoRef.current) {
@@ -102,10 +100,8 @@ const VideoPlayer = () => {
     }
   }, [volume]); // Update whenever volume changes
 
-  const title = `JavaScript Basics (Variables, functions, events, DOM manipulation).
-`;
   return (
-    <div className="relative overflow-hidden text-white group ">
+    <div className="relative text-white group ">
       {/* Upper Title Part */}
       <div
         className={`w-full absolute top-0 left-0  px-4 pt-2 pb-16 bg-gradient-to-b from-black/80 via-black/60 to-transparent

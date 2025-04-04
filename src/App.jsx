@@ -3,7 +3,7 @@ import VideoPlayer from "./modules/VideoPlayer";
 function App() {
   return (
     <main>
-      <VideoPlayer />
+      <VideoPlayer title="JavaScript Basics (Variables, functions, events, DOM manipulation)." />
     </main>
   );
 }
