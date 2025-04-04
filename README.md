@@ -1,12 +1,46 @@
-# React + Vite
+# React Custom Video Player
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A fully customizable and modern video player component built with React.
 
-Currently, two official plugins are available:
+## 🚀 Installation
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```bash
+npm install react-custom-video-player
+```
 
-## Expanding the ESLint configuration
+## 💡 Usage
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```jsx
+import { VideoPlayer } from "react-custom-video-player";
+
+function App() {
+  return <VideoPlayer title="My Video" skipTime={10} />;
+}
+```
+
+## 🎛 Props
+
+| Prop       | Type   | Default | Description                       |
+| ---------- | ------ | ------- | --------------------------------- |
+| `title`    | string | `""`    | The video title                   |
+| `skipTime` | number | `10`    | Seconds to skip on forward/rewind |
+
+## 🎉 Features
+
+- Custom controls
+- Keyboard accessible
+- Picture-in-Picture
+- Theater mode
+- Volume control
+- Playback speed control
+
+## 🛠 Development
+
+```bash
+git clone https://github.com/yourname/react-custom-video-player.git
+cd react-custom-video-player
+npm install
+npm run dev
+```
+
+---
