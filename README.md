@@ -20,10 +20,11 @@ function App() {
 
 ## 🎛 Props
 
-| Prop       | Type   | Default | Description                       |
-| ---------- | ------ | ------- | --------------------------------- |
-| `title`    | string | `""`    | The video title                   |
-| `skipTime` | number | `10`    | Seconds to skip on forward/rewind |
+| Prop       | Type   | Default                                                                                                                                                            | Description                       |
+| ---------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------- |
+| `title`    | string | `""`                                                                                                                                                               | The video title                   |
+| `skipTime` | number | `10`                                                                                                                                                               | Seconds to skip on forward/rewind |
+| `src`      | string | `https://res.cloudinary.com/djv2ujxgy/video/upload/v1740465372/courses/67bd6083318babfd4e0805b1/modules/67bd6362318babfd4e0806c7/lessons/u86n2issdtecvvhyahpy.mp4` | Seconds to skip on forward/rewind |
 
 ## 🎉 Features
 
