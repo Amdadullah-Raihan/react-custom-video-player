@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const PiPButton = ({ videoRef }) => {
   const [isPiP, setIsPiP] = useState(false);
@@ -18,6 +18,18 @@ const PiPButton = ({ videoRef }) => {
       console.error("Error toggling PiP:", error);
     }
   };
+
+  useEffect(() => {
+    const handlePiPExit = () => {
+      setIsPiP(false);
+    };
+
+    document.addEventListener("leavepictureinpicture", handlePiPExit);
+
+    return () => {
+      document.removeEventListener("leavepictureinpicture", handlePiPExit);
+    };
+  }, []);
 
   return (
     <button
