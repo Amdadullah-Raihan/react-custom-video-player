@@ -6,6 +6,7 @@ import VolumeButton from "../components/VolumeButton";
 import FullscreenButton from "../components/FullscreenButton";
 import PiPButton from "../components/PiPButton";
 import RangeSlider from "../components/RangeSlider";
+import PlaybackRateControl from "../components/PlaybackRateControl";
 
 const VideoPlayer = () => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -191,9 +192,7 @@ const VideoPlayer = () => {
 
         {/* PiP & Full Screen Controll */}
         <div className="flex items-center gap-3 ml-auto">
-          <p className="p-1 px-2 font-bold transition rounded-lg cursor-pointer hover:bg-sky-500">
-            1x
-          </p>
+          <PlaybackRateControl videoRef={videoRef} />
           <PiPButton
             videoRef={videoRef}
             size={18}
