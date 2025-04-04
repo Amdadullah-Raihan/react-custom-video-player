@@ -5,20 +5,20 @@ import SkipButton from "../components/SkipButton";
 import VolumeButton from "../components/VolumeButton";
 import FullscreenButton from "../components/FullscreenButton";
 import PiPButton from "../components/PiPButton";
+import RangeSlider from "../components/RangeSlider";
 
 const VideoPlayer = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [showTimeInRemaining, setShowTimeInRemaining] = useState(false);
-  const [timelineWidth, setTimelineWidth] = useState(0);
-  const [isDragging, setIsDragging] = useState(false);
 
   const [videoDuration, setVideoDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
+  const [volume, setVolume] = useState(1);
 
   const videoRef = useRef(null);
-  const timelineRef = useRef(null);
+
   const skipTime = 10; // Skip forward/backward in seconds
 
   const handleLoadedMetadata = () => {
@@ -86,44 +86,6 @@ const VideoPlayer = () => {
     setIsFullscreen(!isFullscreen);
   };
 
-  const handleSeek = (e) => {
-    if (!timelineRef?.current || !videoRef?.current || timelineWidth === 0)
-      return;
-
-    const { left } = timelineRef.current.getBoundingClientRect();
-    const clickX = e.clientX - left;
-
-    // Ensure clickX is within bounds
-    const safeClickX = Math.max(0, Math.min(clickX, timelineWidth));
-
-    const percentageClicked = (safeClickX / timelineWidth) * 100;
-    const newTime = (percentageClicked / 100) * videoDuration;
-
-    videoRef.current.currentTime = newTime;
-    setCurrentTime(newTime);
-  };
-
-  const handleMouseDown = (e) => {
-    setIsDragging(true);
-    handleSeek(e);
-  };
-
-  const handleMouseMove = (e) => {
-    if (isDragging) {
-      handleSeek(e);
-    }
-  };
-
-  const handleMouseUp = () => {
-    setIsDragging(false);
-  };
-
-  const handleMouseLeave = () => {
-    if (isDragging) {
-      setIsDragging(false);
-    }
-  };
-
   const formatTime = (time) => {
     if (isNaN(time) || time < 0) return "0:00";
 
@@ -134,22 +96,10 @@ const VideoPlayer = () => {
   };
 
   useEffect(() => {
-    const updateTimelineWidth = () => {
-      if (timelineRef.current) {
-        setTimelineWidth(timelineRef.current.offsetWidth);
-      }
-    };
-
-    // Set initial width
-    updateTimelineWidth();
-
-    // Listen for window resize
-    window.addEventListener("resize", updateTimelineWidth);
-
-    return () => {
-      window.removeEventListener("resize", updateTimelineWidth);
-    };
-  }, []);
+    if (videoRef.current) {
+      videoRef.current.volume = volume; // Update the actual video element volume
+    }
+  }, [volume]); // Update whenever volume changes
 
   const title = `JavaScript Basics (Variables, functions, events, DOM manipulation).
 `;
@@ -170,28 +120,15 @@ const VideoPlayer = () => {
  } `}
       >
         {/* Timeline Bar */}
-        <div
-          ref={timelineRef}
-          className="absolute left-0 z-50 h-[0.3rem]  ml-2 transition-[height] bg-gray-300 rounded cursor-pointer top-1 "
-          style={{ width: "calc(100% - 1rem)" }}
-          onMouseDown={handleMouseDown}
-          onMouseMove={handleMouseMove}
-          onMouseUp={handleMouseUp}
-          onMouseLeave={handleMouseLeave}
-          onClick={handleSeek}
-        >
-          {/* Progress Indicator */}
-          <div
-            className="relative w-full h-full rounded bg-sky-500 group"
-            style={{ width: `${(currentTime / videoDuration) * 100}%` }}
-          >
-            <div
-              className={`absolute w-3 h-3 transition-all -translate-x-1/2 -translate-y-1/2 bg-sky-500 border-[4px]  shadow  rounded-full left-full top-1/2 scale-0  duration-500 ${
-                isDragging ? "scale-150" : " group-hover:scale-100"
-              }`}
-            />
-          </div>
+        <div className="absolute w-full top-12">
+          <RangeSlider
+            min={0}
+            max={videoDuration}
+            value={currentTime}
+            onChange={(newTime) => (videoRef.current.currentTime = newTime)}
+          />
         </div>
+
         <button
           onClick={togglePlay}
           className="p-1 transition rounded-lg hover:bg-sky-500"
@@ -232,7 +169,16 @@ const VideoPlayer = () => {
           >
             <VolumeButton isMuted={isMuted} size={18} />
           </button>
-          <input type="range" name="" id="" className="h-[0.3rem] max-w-20" />
+
+          {/* Volume Slider */}
+          <div className="w-20">
+            <RangeSlider
+              min={0}
+              max={1}
+              value={volume}
+              onChange={(newVolume) => setVolume(newVolume)}
+            />
+          </div>
         </div>
         <div className="flex items-center gap-3 ml-auto">
           <p className="p-1 px-2 font-bold transition rounded-lg cursor-pointer hover:bg-sky-500">
