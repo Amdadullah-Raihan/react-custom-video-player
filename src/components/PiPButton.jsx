@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const PiPButton = ({ videoRef, size = "24" }) => {
+const PiPButton = ({ videoRef, setIsPlaying, size = "24" }) => {
   const [isPiP, setIsPiP] = useState(false);
 
   const togglePiP = async () => {
@@ -22,6 +22,7 @@ const PiPButton = ({ videoRef, size = "24" }) => {
   useEffect(() => {
     const handlePiPExit = () => {
       setIsPiP(false);
+      setIsPlaying(false);
     };
 
     document.addEventListener("leavepictureinpicture", handlePiPExit);
@@ -29,7 +30,7 @@ const PiPButton = ({ videoRef, size = "24" }) => {
     return () => {
       document.removeEventListener("leavepictureinpicture", handlePiPExit);
     };
-  }, []);
+  }, [setIsPlaying]);
 
   return (
     <button

@@ -194,7 +194,11 @@ const VideoPlayer = () => {
           <p className="p-1 px-2 font-bold transition rounded-lg cursor-pointer hover:bg-sky-500">
             1x
           </p>
-          <PiPButton videoRef={videoRef} size={18} />
+          <PiPButton
+            videoRef={videoRef}
+            size={18}
+            setIsPlaying={setIsPlaying}
+          />
           <button
             onClick={toggleFullScreen}
             className="p-1 transition rounded-lg cursor-pointer hover:bg-sky-500"
