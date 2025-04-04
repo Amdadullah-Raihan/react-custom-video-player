@@ -1,5 +1,5 @@
 {
-  "name": "react-video-player",
+  "name": "react-custom-video-player",
   "version": "1.0.0",
   "description": "A customizable and modern video player built with React and Tailwind CSS.",
   "main": "dist/index.js",
@@ -34,25 +34,20 @@
     "preview": "vite preview",
     "prepublishOnly": "npm run build"
   },
-  "dependencies": {},
   "devDependencies": {
-    "@tailwindcss/vite": "^4.0.17",
-    "autoprefixer": "^10.4.21",
-    "postcss": "^8.5.3",
-    "tailwindcss": "^3.4.17",
-
-    "@vitejs/plugin-react": "^4.3.4",
-    "vite": "^6.2.0",
-
-    "eslint": "^9.21.0",
     "@eslint/js": "^9.21.0",
-    "eslint-plugin-react-hooks": "^5.1.0",
-    "eslint-plugin-react-refresh": "^0.4.19",
-
+    "@tailwindcss/vite": "^4.0.17",
     "@types/react": "^18.2.44",
     "@types/react-dom": "^18.2.17",
-
+    "@vitejs/plugin-react": "^4.3.4",
+    "autoprefixer": "^10.4.21",
+    "eslint": "^9.21.0",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "eslint-plugin-react-refresh": "^0.4.19",
+    "postcss": "^8.5.3",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "tailwindcss": "^3.4.17",
+    "vite": "^6.2.5"
   }
 }
