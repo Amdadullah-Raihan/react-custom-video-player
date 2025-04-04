@@ -45,7 +45,9 @@ const RangeSlider = ({ min = 0, max = 100, value, onChange }) => {
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseup", handleMouseUp);
     };
-  }, [isDragging, handleMouseMove]);
+
+    //eslint-disable-next-line
+  }, [isDragging]);
 
   return (
     <div
