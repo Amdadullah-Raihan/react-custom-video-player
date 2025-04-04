@@ -2,7 +2,7 @@ import VideoPlayer from "./modules/VideoPlayer";
 
 function App() {
   return (
-    <main className="p-5">
+    <main>
       <VideoPlayer />
     </main>
   );

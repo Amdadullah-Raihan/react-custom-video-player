@@ -105,7 +105,7 @@ const VideoPlayer = () => {
   const title = `JavaScript Basics (Variables, functions, events, DOM manipulation).
 `;
   return (
-    <div className="relative overflow-hidden text-white rounded-lg group ">
+    <div className="relative overflow-hidden text-white group ">
       {/* Upper Title Part */}
       <div
         className={`w-full absolute top-0 left-0  px-4 pt-2 pb-16 bg-gradient-to-b from-black/80 via-black/60 to-transparent
