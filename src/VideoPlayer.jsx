@@ -18,6 +18,7 @@ const VideoPlayer = ({ title = "", skipTime = 10, src }) => {
   const [volume, setVolume] = useState(1);
 
   const videoRef = useRef(null);
+  const containerRef = useRef(null);
 
   const handleLoadedMetadata = () => {
     if (videoRef.current) {
@@ -74,12 +75,12 @@ const VideoPlayer = ({ title = "", skipTime = 10, src }) => {
   };
 
   const toggleFullScreen = () => {
-    if (!videoRef.current) return;
+    if (!containerRef.current) return;
 
-    if (isFullscreen) {
+    if (document.fullscreenElement) {
       document.exitFullscreen();
     } else {
-      videoRef.current.requestFullscreen();
+      containerRef.current.requestFullscreen();
     }
     setIsFullscreen(!isFullscreen);
   };
@@ -100,7 +101,7 @@ const VideoPlayer = ({ title = "", skipTime = 10, src }) => {
   }, [volume]); // Update whenever volume changes
 
   return (
-    <div className="relative text-white group ">
+    <div ref={containerRef} className="relative text-white group ">
       {/* Upper Title Part */}
       <div
         className={`w-full absolute top-0 left-0  px-4 pt-2 pb-16 bg-gradient-to-b from-black/80 via-black/60 to-transparent
@@ -194,6 +195,7 @@ const VideoPlayer = ({ title = "", skipTime = 10, src }) => {
             setIsPlaying={setIsPlaying}
           />
           <button
+            aria-label={isFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
             onClick={toggleFullScreen}
             className="p-1 transition rounded-lg cursor-pointer hover:bg-sky-500"
           >
@@ -211,6 +213,8 @@ const VideoPlayer = ({ title = "", skipTime = 10, src }) => {
         onTimeUpdate={handleTimeUpdate}
         onLoadedMetadata={handleLoadedMetadata}
         onEnded={() => setIsPlaying(false)}
+        controls={false}
+        style={{ WebkitMediaControls: "none" }}
       ></video>
     </div>
   );
