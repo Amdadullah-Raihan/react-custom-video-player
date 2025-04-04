@@ -1,4 +1,4 @@
-import VideoPlayer from "./pages/VideoPlayer";
+import VideoPlayer from "./modules/VideoPlayer";
 
 function App() {
   return (

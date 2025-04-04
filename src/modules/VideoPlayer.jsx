@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import video from "../assets/test video.mp4";
-import PlayPauseButton from "./PlayPauseButton";
-import SkipButton from "./SkipButton";
-import VolumeButton from "./VolumeButton";
-import FullscreenButton from "./FullscreenButton";
-import PiPButton from "./PiPButton";
+import PlayPauseButton from "../components/PlayPauseButton";
+import SkipButton from "../components/SkipButton";
+import VolumeButton from "../components/VolumeButton";
+import FullscreenButton from "../components/FullscreenButton";
+import PiPButton from "../components/PiPButton";
 
 const VideoPlayer = () => {
   const [isPlaying, setIsPlaying] = useState(false);
