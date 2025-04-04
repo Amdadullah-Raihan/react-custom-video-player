@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const PiPButton = ({ videoRef }) => {
+const PiPButton = ({ videoRef, size = "24" }) => {
   const [isPiP, setIsPiP] = useState(false);
 
   const togglePiP = async () => {
@@ -39,12 +39,12 @@ const PiPButton = ({ videoRef }) => {
       {isPiP ? (
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
+          width={size}
+          height={size}
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
-          strokeWidth="2"
+          strokeWidth="3"
           strokeLinecap="round"
           strokeLinejoin="round"
           className="lucide lucide-picture-in-picture-exit"
@@ -55,12 +55,12 @@ const PiPButton = ({ videoRef }) => {
       ) : (
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
+          width={size}
+          height={size}
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
-          strokeWidth="2"
+          strokeWidth="3"
           strokeLinecap="round"
           strokeLinejoin="round"
           className="lucide lucide-picture-in-picture-2"
