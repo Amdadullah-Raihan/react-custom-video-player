@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { Fragment, useEffect, useRef, useState } from "react";
 import PlayPauseButton from "./components/PlayPauseButton";
 import SkipButton from "./components/SkipButton";
 import VolumeButton from "./components/VolumeButton";
@@ -109,7 +109,33 @@ const VideoPlayer = ({ title = "", skipTime = 10, src }) => {
    isPlaying ? "opacity-0 group-hover:opacity-100 " : ""
  } `}
       >
-        <p className="text-lg font-bold">{title}</p>
+        <p className="text-sm font-bold md:text-lg">{title}</p>
+      </div>
+
+      {/* play/pluse, forward/backward For small Screen  */}
+      <div className="absolute z-50 flex items-center gap-5 transform -translate-x-1/2 -translate-y-1/2 md:hidden top-[45%] left-1/2">
+        {/* Skip Backward Button */}
+        <button
+          onClick={handleRewind}
+          className="p-1 transition rounded-lg hover:bg-sky-500"
+        >
+          <SkipButton direction="backward" size={20} />
+        </button>
+        {/* Play/Pause Button */}
+        <button
+          onClick={togglePlay}
+          className="p-1 transition rounded-lg hover:bg-sky-500"
+        >
+          <PlayPauseButton isPlaying={isPlaying} size={28} />
+        </button>
+
+        {/* Skip Forward Button */}
+        <button
+          onClick={handleFastForward}
+          className="p-1 transition rounded-lg hover:bg-sky-500"
+        >
+          <SkipButton direction="forward" size={20} />
+        </button>
       </div>
 
       {/* Bottom Controls Part */}
@@ -120,7 +146,7 @@ const VideoPlayer = ({ title = "", skipTime = 10, src }) => {
  } `}
       >
         {/* Timeline Bar */}
-        <div className="absolute w-full top-12">
+        <div className="absolute w-full top-12 ">
           <RangeSlider
             min={0}
             max={videoDuration}
@@ -128,35 +154,37 @@ const VideoPlayer = ({ title = "", skipTime = 10, src }) => {
             onChange={(newTime) => (videoRef.current.currentTime = newTime)}
           />
         </div>
+        {/* For Large Screen */}
+        <div className="hidden md:block md:space-x-2">
+          {/* Play/Pause Button */}
+          <button
+            onClick={togglePlay}
+            className="p-1 transition rounded-lg hover:bg-sky-500"
+          >
+            <PlayPauseButton isPlaying={isPlaying} size={18} />
+          </button>
 
-        {/* Play/Pause Button */}
-        <button
-          onClick={togglePlay}
-          className="p-1 transition rounded-lg hover:bg-sky-500"
-        >
-          <PlayPauseButton isPlaying={isPlaying} size={18} />
-        </button>
+          {/* Skip Backward Button */}
+          <button
+            onClick={handleRewind}
+            className="p-1 transition rounded-lg hover:bg-sky-500"
+          >
+            <SkipButton direction="backward" size={18} />
+          </button>
 
-        {/* Skip Backward Button */}
-        <button
-          onClick={handleRewind}
-          className="p-1 transition rounded-lg hover:bg-sky-500"
-        >
-          <SkipButton direction="backward" size={18} />
-        </button>
+          {/* Skip Forward Button */}
+          <button
+            onClick={handleFastForward}
+            className="p-1 transition rounded-lg hover:bg-sky-500"
+          >
+            <SkipButton direction="forward" size={18} />
+          </button>
+        </div>
 
-        {/* Skip Forward Button */}
-        <button
-          onClick={handleFastForward}
-          className="p-1 transition rounded-lg hover:bg-sky-500"
-        >
-          <SkipButton direction="forward" size={18} />
-        </button>
-
-        {/* Current Time/Toltal Time || Remaining Time/Total Time */}
+        {/* Current Time/Toltal Time || Remaining Time/Total Time for large screens */}
         <p
           onClick={() => setShowTimeInRemaining(!showTimeInRemaining)}
-          className="p-1 px-2 transition rounded-lg cursor-pointer select-none hover:bg-sky-500"
+          className="p-1 text-sm rounded-lg cursor-pointer select-none md:px-2 md:text-lg hover:bg-sky-500"
         >
           {showTimeInRemaining ? (
             <span>-{formatTime(videoDuration - currentTime || 0)}</span>
@@ -167,7 +195,7 @@ const VideoPlayer = ({ title = "", skipTime = 10, src }) => {
         </p>
 
         {/* Volume Control */}
-        <div className="flex items-center gap-2 ml-6">
+        <div className="flex items-center gap-2 md:ml-6">
           <button
             onClick={handleMute}
             className="p-1 transition rounded-lg hover:bg-sky-500"
@@ -176,7 +204,7 @@ const VideoPlayer = ({ title = "", skipTime = 10, src }) => {
           </button>
 
           {/* Volume Slider */}
-          <div className="w-20">
+          <div className="w-16 md:w-20 ">
             <RangeSlider
               min={0}
               max={1}
