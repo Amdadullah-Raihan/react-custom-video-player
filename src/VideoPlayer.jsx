@@ -29,7 +29,7 @@ const VideoPlayer = ({ title = "", skipTime = 10, src }) => {
   };
 
   const togglePlay = () => {
-    if (!videoRef.current) return;
+    if (!videoRef.current || !showControls) return;
 
     if (videoRef.current.paused) {
       videoRef.current.play();
