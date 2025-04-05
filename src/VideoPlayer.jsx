@@ -130,9 +130,9 @@ const VideoPlayer = ({ title = "", skipTime = 10, src }) => {
   return (
     <div
       ref={containerRef}
-      className={`relative text-white group  ${
-        isFullscreen ? "rotate-90 md:rotate-0" : ""
-      } ${!showControls && isPlaying ? "cursor-none" : "cursor-default"}`}
+      className={`relative text-white group   ${
+        !showControls && isPlaying ? "cursor-none" : "cursor-default"
+      }`}
     >
       {/* Upper Title Part */}
       <div
