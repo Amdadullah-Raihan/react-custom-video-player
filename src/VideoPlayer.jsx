@@ -126,7 +126,31 @@ const VideoPlayer = ({ title = "", skipTime = 10, src }) => {
     };
   }, []);
 
-  console.log("showControls", showControls);
+  useEffect(() => {
+    const video = videoRef.current;
+
+    const handlePlay = () => setIsPlaying(true);
+    const handlePause = () => setIsPlaying(false);
+    const handleEnterPiP = () => setIsInPiP(true);
+    const handleLeavePiP = () => setIsInPiP(false);
+    const handleFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
+
+    video.addEventListener("play", handlePlay);
+    video.addEventListener("pause", handlePause);
+    video.addEventListener("enterpictureinpicture", handleEnterPiP);
+    document.addEventListener("leavepictureinpicture", handleLeavePiP);
+    document.addEventListener("fullscreenchange", handleFullscreenChange);
+
+    return () => {
+      video.removeEventListener("play", handlePlay);
+      video.removeEventListener("pause", handlePause);
+      video.removeEventListener("enterpictureinpicture", handleEnterPiP);
+      video.removeEventListener("leavepictureinpicture", handleLeavePiP);
+      document.removeEventListener("fullscreenchange", handleFullscreenChange);
+    };
+  }, []);
 
   return (
     <div
