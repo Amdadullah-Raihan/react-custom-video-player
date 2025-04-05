@@ -152,6 +152,92 @@ const VideoPlayer = ({ title = "", skipTime = 10, src }) => {
     };
   }, []);
 
+  useEffect(() => {
+    const video = videoRef.current;
+
+    const handleKeyDown = (e) => {
+      if (
+        document.activeElement.tagName === "INPUT" ||
+        document.activeElement.tagName === "TEXTAREA"
+      )
+        return;
+      setShowControls(true);
+      switch (e.key) {
+        case " ": // Spacebar
+          e.preventDefault(); // prevent scrolling
+          if (video.paused) {
+            video.play();
+          } else {
+            video.pause();
+          }
+          break;
+        case "ArrowUp":
+          e.preventDefault();
+          setVolume(Math.min(video.volume + 0.1, 1));
+          break;
+        case "ArrowDown":
+          e.preventDefault();
+          setVolume(Math.max(video.volume - 0.1, 0));
+          break;
+        case "ArrowRight":
+          e.preventDefault();
+          video.currentTime = Math.min(
+            video.currentTime + skipTime,
+            video.duration
+          );
+          break;
+        case "ArrowLeft":
+          e.preventDefault();
+          video.currentTime = Math.max(video.currentTime - skipTime, 0);
+          break;
+        case "f":
+        case "F":
+          if (!document.fullscreenElement) {
+            containerRef?.current?.requestFullscreen();
+          } else {
+            document.exitFullscreen();
+          }
+          setIsFullscreen((prev) => !prev);
+          break;
+        case "Escape":
+          if (document.fullscreenElement) {
+            document.exitFullscreen();
+          }
+          break;
+        case "m":
+        case "M":
+          setIsMuted((prev) => !prev);
+          video.muted = !video.muted;
+          break;
+
+        case "p":
+        case "P":
+          if (document.pictureInPictureElement) {
+            document.exitPictureInPicture();
+          } else {
+            if (
+              video !== document.pictureInPictureElement &&
+              document.pictureInPictureEnabled
+            ) {
+              video.requestPictureInPicture().catch((error) => {
+                console.error("Failed to enter PiP mode:", error);
+              });
+            }
+          }
+          break;
+
+        default:
+          break;
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
   return (
     <div
       ref={containerRef}
