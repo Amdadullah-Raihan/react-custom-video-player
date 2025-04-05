@@ -109,7 +109,7 @@ const VideoPlayer = ({ title = "", skipTime = 10, src }) => {
       clearTimeout(inactivityTimer.current);
       inactivityTimer.current = setTimeout(() => {
         setShowControls(false);
-      }, 1000); // Hide after 3s of inactivity
+      }, 2000); // Hide after 3s of inactivity
     };
 
     const container = containerRef.current;
