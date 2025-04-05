@@ -1,4 +1,3 @@
-````markdown
 # React Custom Video Player
 
 A fully customizable and modern video player component built with React.
@@ -10,7 +9,6 @@ Install the package via npm:
 ```bash
 npm install @amdadullah_raihan/react-custom-video-player
 ```
-````
 
 ## 💡 Usage
 
@@ -53,11 +51,3 @@ npm run dev
 ## 📄 License
 
 MIT License. See [LICENSE](./LICENSE) for more details.
-
-```
-
-### Changes made:
-1. **Installation Section**: Added the correct installation command to `npm install @amdadullah_raihan/react-custom-video-player`.
-2. **Prop Table**: Corrected the default value for `src` to represent its description.
-3. **Development**: Made the GitHub URL and command more clear and consistent.
-```
