@@ -16,9 +16,11 @@ const VideoPlayer = ({ title = "", skipTime = 10, src }) => {
   const [videoDuration, setVideoDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const [volume, setVolume] = useState(1);
+  const [showControls, setShowControls] = useState(true);
 
   const videoRef = useRef(null);
   const containerRef = useRef(null);
+  const inactivityTimer = useRef(null);
 
   const handleLoadedMetadata = () => {
     if (videoRef.current) {
@@ -100,13 +102,43 @@ const VideoPlayer = ({ title = "", skipTime = 10, src }) => {
     }
   }, [volume]); // Update whenever volume changes
 
+  useEffect(() => {
+    const handleMouseMove = () => {
+      setShowControls(true);
+
+      clearTimeout(inactivityTimer.current);
+      inactivityTimer.current = setTimeout(() => {
+        setShowControls(false);
+      }, 1000); // Hide after 3s of inactivity
+    };
+
+    const container = containerRef.current;
+    if (container) {
+      container.addEventListener("mousemove", handleMouseMove);
+    }
+
+    return () => {
+      if (container) {
+        container.removeEventListener("mousemove", handleMouseMove);
+      }
+      clearTimeout(inactivityTimer.current);
+    };
+  }, []);
+
+  console.log("showControls", showControls);
+
   return (
-    <div ref={containerRef} className="relative text-white group ">
+    <div
+      ref={containerRef}
+      className={`relative text-white group ${
+        !showControls ? "cursor-none" : "cursor-default"
+      }`}
+    >
       {/* Upper Title Part */}
       <div
         className={`w-full absolute top-0 left-0  px-4 pt-2 pb-16 bg-gradient-to-b from-black/80 via-black/60 to-transparent
  transition duration-500  z-50 ${
-   isPlaying ? "opacity-0 group-hover:opacity-100 " : ""
+   showControls ? "opacity-100" : "opacity-0 pointer-events-none cursor-none"
  } `}
       >
         <p className="text-sm font-bold md:text-lg">{title}</p>
@@ -142,7 +174,7 @@ const VideoPlayer = ({ title = "", skipTime = 10, src }) => {
       <div
         className={`absolute w-full flex items-center gap-2  px-2 pt-16 pb-2 bottom-0 bg-gradient-to-t from-black/80 via-black/60 to-transparent
  transition duration-500  z-40 ${
-   isPlaying ? "opacity-0 group-hover:opacity-100 " : ""
+   showControls ? "opacity-100" : "opacity-0 pointer-events-none cursor-none"
  } `}
       >
         {/* Timeline Bar */}
