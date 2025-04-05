@@ -146,27 +146,35 @@ const VideoPlayer = ({ title = "", skipTime = 10, src }) => {
         <p className="text-sm font-bold md:text-lg">{title}</p>
       </div>
 
-      {/* play/pluse, forward/backward For small Screen  */}
-      <div className="absolute z-50 flex items-center gap-5 transform -translate-x-1/2 -translate-y-1/2 md:hidden top-[45%] left-1/2">
+      {/* Mobile Playback Controls */}
+      <div
+        className={`absolute z-50 flex items-center gap-6 transform -translate-x-1/2 -translate-y-1/2 md:hidden top-[45%] left-1/2 
+ rounded-full p-2  transition-all duration-300 ${
+   showControls || !isPlaying
+     ? "opacity-100"
+     : "opacity-0 pointer-events-none cursor-none"
+ }`}
+      >
         {/* Skip Backward Button */}
         <button
           onClick={handleRewind}
-          className="p-1 transition rounded-lg hover:bg-sky-500"
+          className="p-2 transition-all rounded-full bg-white/10 backdrop-blur-sm hover:bg-sky-600"
         >
           <SkipButton direction="backward" size={20} />
         </button>
+
         {/* Play/Pause Button */}
         <button
           onClick={togglePlay}
-          className="p-1 transition rounded-lg hover:bg-sky-500"
+          className="p-3 text-white transition-all rounded-full shadow-md bg-sky-500 hover:bg-sky-600"
         >
-          <PlayPauseButton isPlaying={isPlaying} size={28} />
+          <PlayPauseButton isPlaying={isPlaying} size={30} />
         </button>
 
         {/* Skip Forward Button */}
         <button
           onClick={handleFastForward}
-          className="p-1 transition rounded-lg hover:bg-sky-500"
+          className="p-2 transition-all rounded-full bg-white/10 backdrop-blur-sm hover:bg-sky-600"
         >
           <SkipButton direction="forward" size={20} />
         </button>
