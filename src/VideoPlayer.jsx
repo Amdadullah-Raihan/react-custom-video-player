@@ -131,14 +131,16 @@ const VideoPlayer = ({ title = "", skipTime = 10, src }) => {
     <div
       ref={containerRef}
       className={`relative text-white group ${
-        !showControls ? "cursor-none" : "cursor-default"
+        !showControls && isPlaying ? "cursor-none" : "cursor-default"
       }`}
     >
       {/* Upper Title Part */}
       <div
         className={`w-full absolute top-0 left-0  px-4 pt-2 pb-16 bg-gradient-to-b from-black/80 via-black/60 to-transparent
  transition duration-500  z-50 ${
-   showControls ? "opacity-100" : "opacity-0 pointer-events-none cursor-none"
+   showControls || !isPlaying
+     ? "opacity-100"
+     : "opacity-0 pointer-events-none cursor-none"
  } `}
       >
         <p className="text-sm font-bold md:text-lg">{title}</p>
@@ -174,7 +176,9 @@ const VideoPlayer = ({ title = "", skipTime = 10, src }) => {
       <div
         className={`absolute w-full flex items-center gap-2  px-2 pt-16 pb-2 bottom-0 bg-gradient-to-t from-black/80 via-black/60 to-transparent
  transition duration-500  z-40 ${
-   showControls ? "opacity-100" : "opacity-0 pointer-events-none cursor-none"
+   showControls || !isPlaying
+     ? "opacity-100"
+     : "opacity-0 pointer-events-none cursor-none"
  } `}
       >
         {/* Timeline Bar */}
