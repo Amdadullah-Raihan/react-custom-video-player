@@ -130,9 +130,9 @@ const VideoPlayer = ({ title = "", skipTime = 10, src }) => {
   return (
     <div
       ref={containerRef}
-      className={`relative text-white group ${
-        !showControls && isPlaying ? "cursor-none" : "cursor-default"
-      }`}
+      className={`relative text-white group  ${
+        isFullscreen ? "rotate-90 md:rotate-0" : ""
+      } ${!showControls && isPlaying ? "cursor-none" : "cursor-default"}`}
     >
       {/* Upper Title Part */}
       <div
@@ -141,43 +141,9 @@ const VideoPlayer = ({ title = "", skipTime = 10, src }) => {
    showControls || !isPlaying
      ? "opacity-100"
      : "opacity-0 pointer-events-none cursor-none"
- } `}
-      >
-        <p className="text-sm font-bold md:text-lg">{title}</p>
-      </div>
-
-      {/* Mobile Playback Controls */}
-      <div
-        className={`absolute z-50 flex items-center gap-6 transform -translate-x-1/2 -translate-y-1/2 md:hidden top-[45%] left-1/2 
- rounded-full p-2  transition-all duration-300 ${
-   showControls || !isPlaying
-     ? "opacity-100"
-     : "opacity-0 pointer-events-none cursor-none"
  }`}
       >
-        {/* Skip Backward Button */}
-        <button
-          onClick={handleRewind}
-          className="p-2 transition-all rounded-full bg-white/10 backdrop-blur-sm hover:bg-sky-600"
-        >
-          <SkipButton direction="backward" size={20} />
-        </button>
-
-        {/* Play/Pause Button */}
-        <button
-          onClick={togglePlay}
-          className="p-3 text-white transition-all rounded-full shadow-md bg-sky-500 hover:bg-sky-600"
-        >
-          <PlayPauseButton isPlaying={isPlaying} size={30} />
-        </button>
-
-        {/* Skip Forward Button */}
-        <button
-          onClick={handleFastForward}
-          className="p-2 transition-all rounded-full bg-white/10 backdrop-blur-sm hover:bg-sky-600"
-        >
-          <SkipButton direction="forward" size={20} />
-        </button>
+        <p className="text-sm font-bold md:text-lg">{title}</p>
       </div>
 
       {/* Bottom Controls Part */}
@@ -275,19 +241,57 @@ const VideoPlayer = ({ title = "", skipTime = 10, src }) => {
           </button>
         </div>
       </div>
+      <div
+        className={`relative ${
+          isFullscreen ? "  flex items-center justify-center h-full w-full" : ""
+        }`}
+      >
+        {/* Mobile Playback Controls */}
+        <div
+          className={`absolute z-50 flex items-center gap-6 transform -translate-x-1/2 -translate-y-1/2 md:hidden  left-1/2 
+ rounded-full p-2  transition-all duration-300 ${
+   showControls || !isPlaying
+     ? "opacity-100"
+     : "opacity-0 pointer-events-none cursor-none"
+ } ${isFullscreen ? "top-[50%]" : "top-[45%]"}`}
+        >
+          {/* Skip Backward Button */}
+          <button
+            onClick={handleRewind}
+            className="p-2 transition-all rounded-full bg-white/10 backdrop-blur-sm hover:bg-sky-600"
+          >
+            <SkipButton direction="backward" size={20} />
+          </button>
 
-      <video
-        ref={videoRef}
-        onClick={togglePlay}
-        src={src}
-        className="w-full"
-        download="false"
-        onTimeUpdate={handleTimeUpdate}
-        onLoadedMetadata={handleLoadedMetadata}
-        onEnded={() => setIsPlaying(false)}
-        controls={false}
-        style={{ WebkitMediaControls: "none" }}
-      ></video>
+          {/* Play/Pause Button */}
+          <button
+            onClick={togglePlay}
+            className="p-3 text-white transition-all rounded-full shadow-md bg-sky-500 hover:bg-sky-600"
+          >
+            <PlayPauseButton isPlaying={isPlaying} size={30} />
+          </button>
+
+          {/* Skip Forward Button */}
+          <button
+            onClick={handleFastForward}
+            className="p-2 transition-all rounded-full bg-white/10 backdrop-blur-sm hover:bg-sky-600"
+          >
+            <SkipButton direction="forward" size={20} />
+          </button>
+        </div>
+        <video
+          ref={videoRef}
+          onClick={togglePlay}
+          src={src}
+          className={`w-full   `}
+          download="false"
+          onTimeUpdate={handleTimeUpdate}
+          onLoadedMetadata={handleLoadedMetadata}
+          onEnded={() => setIsPlaying(false)}
+          controls={false}
+          style={{ WebkitMediaControls: "none" }}
+        ></video>
+      </div>
     </div>
   );
 };
