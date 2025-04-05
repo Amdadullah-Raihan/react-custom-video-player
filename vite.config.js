@@ -1,3 +1,4 @@
+// vite.config.js
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
@@ -6,11 +7,11 @@ export default defineConfig({
   build: {
     lib: {
       entry: "src/index.js",
-      name: "ReactVideoPlayer",
-      fileName: "index",
+      name: "ReactCustomVideoPlayer",
+      fileName: (format) => `index.${format}.js`,
     },
     rollupOptions: {
-      external: ["react", "react-dom"],
+      external: ["react", "react-dom"], // 👈 prevent bundling React
       output: {
         globals: {
           react: "React",
