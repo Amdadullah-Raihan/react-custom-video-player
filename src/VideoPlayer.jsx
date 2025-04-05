@@ -1,11 +1,11 @@
 import React, { Fragment, useEffect, useRef, useState } from "react";
-import PlayPauseButton from "./components/PlayPauseButton";
-import SkipButton from "./components/SkipButton";
-import VolumeButton from "./components/VolumeButton";
-import FullscreenButton from "./components/FullscreenButton";
-import PiPButton from "./components/PiPButton";
-import RangeSlider from "./components/RangeSlider";
-import PlaybackRateControl from "./components/PlaybackRateControl";
+import PlayPauseButton from "./components/PlayPauseButton.jsx";
+import SkipButton from "./components/SkipButton.jsx";
+import VolumeButton from "./components/VolumeButton.jsx";
+import FullscreenButton from "./components/FullscreenButton.jsx";
+import PiPButton from "./components/PiPButton.jsx";
+import RangeSlider from "./components/RangeSlider.jsx";
+import PlaybackRateControl from "./components/PlaybackRateControl.jsx";
 
 const VideoPlayer = ({ title = "", skipTime = 10, src }) => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -41,6 +41,7 @@ const VideoPlayer = ({ title = "", skipTime = 10, src }) => {
 
   const handleTimeUpdate = () => {
     if (videoRef.current) {
+      ``;
       setCurrentTime(videoRef.current.currentTime);
     }
   };
