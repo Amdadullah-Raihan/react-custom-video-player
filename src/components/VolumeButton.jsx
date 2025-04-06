@@ -1,7 +1,7 @@
 import React from "react";
 
-const VolumeButton = ({ isMuted, size = 24, color = "white" }) => {
-  return isMuted ? (
+const VolumeButton = ({ isMuted, volume, size = 24, color = "white" }) => {
+  return isMuted || volume === 0 ? (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width={size}

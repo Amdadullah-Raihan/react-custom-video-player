@@ -321,7 +321,7 @@ const VideoPlayer = ({ title = "", skipTime = 10, src }) => {
             onClick={handleMute}
             className="p-1 transition rounded-lg hover:bg-sky-500"
           >
-            <VolumeButton isMuted={isMuted} size={18} />
+            <VolumeButton isMuted={isMuted} volume={volume} size={18} />
           </button>
 
           {/* Volume Slider */}
