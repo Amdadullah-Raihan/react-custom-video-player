@@ -31,6 +31,15 @@ const RangeSlider = ({ min = 0, max = 100, value, onChange }) => {
     }
   };
 
+  const handleWheel = (e) => {
+    e.preventDefault();
+    const delta = Math.sign(e.deltaY); // -1 for up, 1 for down
+    const step = (max - min) / 100; // Adjust this for how fast you want it to scroll
+    let newValue = value - delta * step;
+    newValue = Math.max(min, Math.min(newValue, max)); // Clamp between min and max
+    onChange(newValue);
+  };
+
   const handleMouseUp = () => setIsDragging(false);
 
   useEffect(() => {
@@ -55,6 +64,7 @@ const RangeSlider = ({ min = 0, max = 100, value, onChange }) => {
       className="relative w-full h-[0.3rem] bg-gray-300 rounded cursor-pointer"
       style={{ width: "calc(100% - 1rem)" }}
       onMouseDown={handleMouseDown}
+      onWheel={handleWheel}
     >
       {/* Progress Bar */}
       <div
