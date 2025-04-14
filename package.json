@@ -1,6 +1,6 @@
 {
   "name": "@amdadullah_raihan/react-custom-video-player",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "A customizable and modern video player built with React and Tailwind CSS.",
   "main": "./dist/index.umd.js",
   "module": "./dist/index.es.js",
@@ -11,7 +11,6 @@
       "require": "./dist/index.umd.js"
     }
   },
-
   "files": [
     "dist"
   ],
