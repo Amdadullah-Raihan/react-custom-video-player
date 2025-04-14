@@ -14,7 +14,7 @@
   "files": [
     "dist"
   ],
-  "style": "dist/style.css",
+  "style": "dist/react-custom-video-player.css",
   "keywords": [
     "react",
     "video-player",
