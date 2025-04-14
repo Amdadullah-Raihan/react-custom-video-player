@@ -1,6 +1,6 @@
 {
   "name": "@amdadullah_raihan/react-custom-video-player",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A customizable and modern video player built with React and Tailwind CSS.",
   "main": "./dist/index.umd.js",
   "module": "./dist/index.es.js",
@@ -33,7 +33,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "prepublishOnly": "npm run build",
-     "prepublish": "rm -rf ./dist && npm run build"
+    "prepublish": "rm -rf ./dist && npm run build"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",
