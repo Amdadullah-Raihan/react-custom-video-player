@@ -10,11 +10,13 @@
       "import": "./dist/index.es.js",
       "require": "./dist/index.umd.js"
     }
+    ,
+    "./dist/react-custom-video-player.css": "./dist/react-custom-video-player.css"
   },
   "files": [
     "dist"
   ],
-  "style": "dist/react-custom-video-player.css",
+  "style": "./dist/react-custom-video-player.css",
   "keywords": [
     "react",
     "video-player",
