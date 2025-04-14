@@ -8,6 +8,7 @@ export default defineConfig({
     lib: {
       entry: "src/index.js",
       name: "ReactCustomVideoPlayer",
+      formats: ["es", "umd"],
       fileName: (format) => `index.${format}.js`,
     },
     rollupOptions: {

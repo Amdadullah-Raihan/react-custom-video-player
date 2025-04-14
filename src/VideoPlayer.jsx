@@ -97,17 +97,6 @@ const VideoPlayer = ({ title = "", skipTime = 10, src }) => {
     return `${minutes}:${seconds.toString().padStart(2, "0")}`;
   };
 
-  const isYouTubeLink = (url) => {
-    const youtubeRegex =
-      /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$/;
-    return youtubeRegex.test(url);
-  };
-
-  const getYouTubeVideoId = (url) => {
-    const urlParams = new URLSearchParams(new URL(url).search);
-    return urlParams.get("v") || url.split("/").pop();
-  };
-
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.volume = volume; // Update the actual video element volume
@@ -148,7 +137,6 @@ const VideoPlayer = ({ title = "", skipTime = 10, src }) => {
       setIsFullscreen(!!document.fullscreenElement);
     };
 
-    if (!video) return;
     video.addEventListener("play", handlePlay);
     video.addEventListener("pause", handlePause);
     video.addEventListener("enterpictureinpicture", handleEnterPiP);
@@ -251,190 +239,171 @@ const VideoPlayer = ({ title = "", skipTime = 10, src }) => {
   }, []);
 
   return (
-    <>
-      {isYouTubeLink(src) ? (
-        <div className="relative w-full pb-[56.25%]">
-          <iframe
-            src={`https://www.youtube.com/embed/${getYouTubeVideoId(src)}`}
-            title={title}
-            className="absolute top-0 left-0 w-full h-full"
-            frameBorder="0"
-            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowFullScreen
-          ></iframe>
-        </div>
-      ) : (
-        <div
-          ref={containerRef}
-          className={`relative text-white group   ${
-            !showControls && isPlaying ? "cursor-none" : "cursor-default"
-          }`}
-        >
-          {/* Upper Title Part */}
-          <div
-            className={`w-full absolute top-0 left-0  px-4 pt-2 pb-16 bg-gradient-to-b from-black/80 via-black/60 to-transparent
+    <div
+      ref={containerRef}
+      className={`relative text-white group   ${
+        !showControls && isPlaying ? "cursor-none" : "cursor-default"
+      }`}
+    >
+      {/* Upper Title Part */}
+      <div
+        className={`w-full absolute top-0 left-0  px-4 pt-2 pb-16 bg-gradient-to-b from-black/80 via-black/60 to-transparent
  transition duration-500  z-50 ${
    showControls || !isPlaying
      ? "opacity-100"
      : "opacity-0 pointer-events-none cursor-none"
  }`}
-          >
-            <p className="text-sm font-bold md:text-lg">{title}</p>
-          </div>
+      >
+        <p className="text-sm font-bold md:text-lg">{title}</p>
+      </div>
 
-          {/* Bottom Controls Part */}
-          <div
-            className={`absolute w-full flex items-center gap-2  px-2 pt-16 pb-2 bottom-0 bg-gradient-to-t from-black/80 via-black/60 to-transparent
+      {/* Bottom Controls Part */}
+      <div
+        className={`absolute w-full flex items-center gap-2  px-2 pt-16 pb-2 bottom-0 bg-gradient-to-t from-black/80 via-black/60 to-transparent
  transition duration-500  z-40 ${
    showControls || !isPlaying
      ? "opacity-100"
      : "opacity-0 pointer-events-none cursor-none"
  } `}
+      >
+        {/* Timeline Bar */}
+        <div className="absolute w-full top-12 ">
+          <RangeSlider
+            min={0}
+            max={videoDuration}
+            value={currentTime}
+            onChange={(newTime) => (videoRef.current.currentTime = newTime)}
+          />
+        </div>
+        {/* For Large Screen */}
+        <div className="hidden md:block md:space-x-2">
+          {/* Play/Pause Button */}
+          <button
+            onClick={togglePlay}
+            className="p-1 transition rounded-lg hover:bg-sky-500"
           >
-            {/* Timeline Bar */}
-            <div className="absolute w-full top-12 ">
-              <RangeSlider
-                min={0}
-                max={videoDuration}
-                value={currentTime}
-                onChange={(newTime) => (videoRef.current.currentTime = newTime)}
-              />
-            </div>
-            {/* For Large Screen */}
-            <div className="hidden md:block md:space-x-2">
-              {/* Play/Pause Button */}
-              <button
-                onClick={togglePlay}
-                className="p-1 transition rounded-lg hover:bg-sky-500"
-              >
-                <PlayPauseButton isPlaying={isPlaying} size={18} />
-              </button>
+            <PlayPauseButton isPlaying={isPlaying} size={18} />
+          </button>
 
-              {/* Skip Backward Button */}
-              <button
-                onClick={handleRewind}
-                className="p-1 transition rounded-lg hover:bg-sky-500"
-              >
-                <SkipButton direction="backward" size={18} />
-              </button>
+          {/* Skip Backward Button */}
+          <button
+            onClick={handleRewind}
+            className="p-1 transition rounded-lg hover:bg-sky-500"
+          >
+            <SkipButton direction="backward" size={18} />
+          </button>
 
-              {/* Skip Forward Button */}
-              <button
-                onClick={handleFastForward}
-                className="p-1 transition rounded-lg hover:bg-sky-500"
-              >
-                <SkipButton direction="forward" size={18} />
-              </button>
-            </div>
+          {/* Skip Forward Button */}
+          <button
+            onClick={handleFastForward}
+            className="p-1 transition rounded-lg hover:bg-sky-500"
+          >
+            <SkipButton direction="forward" size={18} />
+          </button>
+        </div>
 
-            {/* Current Time/Toltal Time || Remaining Time/Total Time for large screens */}
-            <p
-              onClick={() => setShowTimeInRemaining(!showTimeInRemaining)}
-              className="p-1 text-sm rounded-lg cursor-pointer select-none md:px-2 md:text-lg hover:bg-sky-500"
-            >
-              {showTimeInRemaining ? (
-                <span>-{formatTime(videoDuration - currentTime || 0)}</span>
-              ) : (
-                <span>{formatTime(currentTime || 0)}</span>
-              )}{" "}
-              / <span>{formatTime(videoDuration || 0)}</span>
-            </p>
+        {/* Current Time/Toltal Time || Remaining Time/Total Time for large screens */}
+        <p
+          onClick={() => setShowTimeInRemaining(!showTimeInRemaining)}
+          className="p-1 text-sm rounded-lg cursor-pointer select-none md:px-2 md:text-lg hover:bg-sky-500"
+        >
+          {showTimeInRemaining ? (
+            <span>-{formatTime(videoDuration - currentTime || 0)}</span>
+          ) : (
+            <span>{formatTime(currentTime || 0)}</span>
+          )}{" "}
+          / <span>{formatTime(videoDuration || 0)}</span>
+        </p>
 
-            {/* Volume Control */}
-            <div className="flex items-center gap-2 md:ml-6">
-              <button
-                onClick={handleMute}
-                className="p-1 transition rounded-lg hover:bg-sky-500"
-              >
-                <VolumeButton isMuted={isMuted} volume={volume} size={18} />
-              </button>
+        {/* Volume Control */}
+        <div className="flex items-center gap-2 md:ml-6">
+          <button
+            onClick={handleMute}
+            className="p-1 transition rounded-lg hover:bg-sky-500"
+          >
+            <VolumeButton isMuted={isMuted} volume={volume} size={18} />
+          </button>
 
-              {/* Volume Slider */}
-              <div className="w-16 md:w-20 ">
-                <RangeSlider
-                  min={0}
-                  max={1}
-                  value={volume}
-                  onChange={(newVolume) => setVolume(newVolume)}
-                />
-              </div>
-            </div>
-
-            {/* PiP & Full Screen Controll */}
-            <div className="flex items-center gap-3 ml-auto">
-              <PlaybackRateControl videoRef={videoRef} />
-              <PiPButton
-                videoRef={videoRef}
-                size={18}
-                setIsPlaying={setIsPlaying}
-              />
-              <button
-                aria-label={
-                  isFullscreen ? "Exit fullscreen" : "Enter fullscreen"
-                }
-                onClick={toggleFullScreen}
-                className="p-1 transition rounded-lg cursor-pointer hover:bg-sky-500"
-              >
-                <FullscreenButton isFullscreen={isFullscreen} size={18} />
-              </button>
-            </div>
+          {/* Volume Slider */}
+          <div className="w-16 md:w-20 ">
+            <RangeSlider
+              min={0}
+              max={1}
+              value={volume}
+              onChange={(newVolume) => setVolume(newVolume)}
+            />
           </div>
-          <div
-            className={`relative ${
-              isFullscreen
-                ? "  flex items-center justify-center h-full w-full"
-                : ""
-            }`}
+        </div>
+
+        {/* PiP & Full Screen Controll */}
+        <div className="flex items-center gap-3 ml-auto">
+          <PlaybackRateControl videoRef={videoRef} />
+          <PiPButton
+            videoRef={videoRef}
+            size={18}
+            setIsPlaying={setIsPlaying}
+          />
+          <button
+            aria-label={isFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
+            onClick={toggleFullScreen}
+            className="p-1 transition rounded-lg cursor-pointer hover:bg-sky-500"
           >
-            {/* Mobile Playback Controls */}
-            <div
-              className={`absolute z-50 flex items-center gap-6 transform -translate-x-1/2 -translate-y-1/2 md:hidden  left-1/2 
+            <FullscreenButton isFullscreen={isFullscreen} size={18} />
+          </button>
+        </div>
+      </div>
+      <div
+        className={`relative ${
+          isFullscreen ? "  flex items-center justify-center h-full w-full" : ""
+        }`}
+      >
+        {/* Mobile Playback Controls */}
+        <div
+          className={`absolute z-50 flex items-center gap-6 transform -translate-x-1/2 -translate-y-1/2 md:hidden  left-1/2 
  rounded-full p-2  transition-all duration-300 ${
    showControls || !isPlaying
      ? "opacity-100"
      : "opacity-0 pointer-events-none cursor-none"
  } ${isFullscreen ? "top-[50%]" : "top-[45%]"}`}
-            >
-              {/* Skip Backward Button */}
-              <button
-                onClick={handleRewind}
-                className="p-2 transition-all rounded-full bg-white/10 backdrop-blur-sm hover:bg-sky-600"
-              >
-                <SkipButton direction="backward" size={20} />
-              </button>
+        >
+          {/* Skip Backward Button */}
+          <button
+            onClick={handleRewind}
+            className="p-2 transition-all rounded-full bg-white/10 backdrop-blur-sm hover:bg-sky-600"
+          >
+            <SkipButton direction="backward" size={20} />
+          </button>
 
-              {/* Play/Pause Button */}
-              <button
-                onClick={togglePlay}
-                className="p-3 text-white transition-all rounded-full shadow-md bg-sky-500 hover:bg-sky-600"
-              >
-                <PlayPauseButton isPlaying={isPlaying} size={30} />
-              </button>
+          {/* Play/Pause Button */}
+          <button
+            onClick={togglePlay}
+            className="p-3 text-white transition-all rounded-full shadow-md bg-sky-500 hover:bg-sky-600"
+          >
+            <PlayPauseButton isPlaying={isPlaying} size={30} />
+          </button>
 
-              {/* Skip Forward Button */}
-              <button
-                onClick={handleFastForward}
-                className="p-2 transition-all rounded-full bg-white/10 backdrop-blur-sm hover:bg-sky-600"
-              >
-                <SkipButton direction="forward" size={20} />
-              </button>
-            </div>
-            <video
-              ref={videoRef}
-              onClick={togglePlay}
-              src={src}
-              className={`w-full   `}
-              download="false"
-              onTimeUpdate={handleTimeUpdate}
-              onLoadedMetadata={handleLoadedMetadata}
-              onEnded={() => setIsPlaying(false)}
-              controls={false}
-              style={{ WebkitMediaControls: "none" }}
-            ></video>
-          </div>
+          {/* Skip Forward Button */}
+          <button
+            onClick={handleFastForward}
+            className="p-2 transition-all rounded-full bg-white/10 backdrop-blur-sm hover:bg-sky-600"
+          >
+            <SkipButton direction="forward" size={20} />
+          </button>
         </div>
-      )}
-    </>
+        <video
+          ref={videoRef}
+          onClick={togglePlay}
+          src={src}
+          className={`w-full   `}
+          download="false"
+          onTimeUpdate={handleTimeUpdate}
+          onLoadedMetadata={handleLoadedMetadata}
+          onEnded={() => setIsPlaying(false)}
+          controls={false}
+          style={{ WebkitMediaControls: "none" }}
+        ></video>
+      </div>
+    </div>
   );
 };
 
