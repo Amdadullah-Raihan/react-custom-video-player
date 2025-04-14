@@ -11,9 +11,11 @@
       "require": "./dist/index.umd.js"
     }
   },
+
   "files": [
     "dist"
   ],
+  "style": "dist/style.css",
   "keywords": [
     "react",
     "video-player",
