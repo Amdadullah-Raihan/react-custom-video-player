@@ -14,9 +14,16 @@ npm install @amdadullah_raihan/react-custom-video-player
 
 ```jsx
 import { VideoPlayer } from "@amdadullah_raihan/react-custom-video-player";
+import "@amdadullah_raihan/react-custom-video-player/dist/react-custom-video-player.css";
 
 function App() {
-  return <VideoPlayer title="My Video" skipTime={10} />;
+  return (
+    <VideoPlayer
+      title="JavaScript Basics"
+      skipTime={10}
+      src="https://example.com/video.mp4"
+    />
+  );
 }
 ```
 
