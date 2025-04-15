@@ -2,11 +2,11 @@
 
 A fully customizable and modern video player component built with React.
 
-## 🔴 See Live Demo
+## 🔴 [See Live Demo](https://react-custom-video-player.vercel.app/)
 
 > A sneak peek of the React Custom Video Player in action.
 
-![React custom video player demo](https://github.com/user-attachments/assets/2dfad1c2-48b9-4a0e-b3db-005ba7f02d8f)
+[![React custom video player demo](https://github.com/user-attachments/assets/2dfad1c2-48b9-4a0e-b3db-005ba7f02d8f)](https://react-custom-video-player.vercel.app/)
 
 ## 🚀 Installation
 
