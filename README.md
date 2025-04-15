@@ -44,6 +44,55 @@ function App() {
 - Volume control
 - Playback speed control
 
+## 🎮 How to Use / Controls
+
+### ▶️ Play / Pause
+
+- Click the play/pause button
+- Press `Space`
+
+### ⏩ Seek Forward
+
+- Click the forward button
+- Press `→` (Right Arrow)
+
+### ⏪ Seek Backward
+
+- Click the rewind button
+- Press `←` (Left Arrow)
+
+---
+
+## ⏳ Timeline Control
+
+- Click anywhere on the progress bar to jump to that point
+- Drag the thumb/pointer to scrub through the video
+- Scroll your mouse wheel over the timeline to fine-tune the position
+
+---
+
+## 🔊 Volume Control
+
+- Use the volume slider or scroll over it
+- Press `↑` / `↓` to increase or decrease volume
+- Press `M` to mute/unmute
+
+---
+
+## 🔲 Fullscreen & Modes
+
+- **Fullscreen:** Click the fullscreen button or press `F`
+- **Picture-in-Picture (PiP):** Click the PiP button or press `P`
+- **Theater Mode:** Press `T` to toggle
+
+---
+
+## 🎚 Playback Speed
+
+- Use the speed selector
+- Press `Shift + .` to increase
+- Press `Shift + ,` to decrease
+
 ## 🛠 Development
 
 To clone and start the development server:
