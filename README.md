@@ -19,12 +19,16 @@ npm install @amdadullah_raihan/react-custom-video-player
 ## 💡 Usage
 
 ```jsx
+import { useRef } from "react";
 import { VideoPlayer } from "@amdadullah_raihan/react-custom-video-player";
 import "@amdadullah_raihan/react-custom-video-player/dist/react-custom-video-player.css";
 
 function App() {
+  const videoRef = useRef(null);
+
   return (
     <VideoPlayer
+      ref={videoRef}
       title="JavaScript Basics"
       skipTime={10}
       src="https://example.com/video.mp4"
