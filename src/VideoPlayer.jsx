@@ -7,7 +7,7 @@ import PiPButton from "./components/PiPButton.jsx";
 import RangeSlider from "./components/RangeSlider.jsx";
 import PlaybackRateControl from "./components/PlaybackRateControl.jsx";
 
-const VideoPlayer = ({ title = "", skipTime = 10, src }) => {
+const VideoPlayer = ({ title = "", skipTime = 10, src, ref: videoRef }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -18,7 +18,6 @@ const VideoPlayer = ({ title = "", skipTime = 10, src }) => {
   const [volume, setVolume] = useState(1);
   const [showControls, setShowControls] = useState(true);
 
-  const videoRef = useRef(null);
   const containerRef = useRef(null);
   const inactivityTimer = useRef(null);
 
