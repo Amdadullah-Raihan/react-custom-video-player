@@ -1,7 +1,6 @@
 # React Custom Video Player
 
-A fully customizable and modern video player component built with React. 
-
+A fully customizable and modern video player component built with React.
 
 ## 🔴 See Live Demo
 
@@ -44,6 +43,7 @@ function App() {
 
 ## 🎉 Features
 
+- Default Youtube video support
 - Custom controls
 - Keyboard accessible
 - Picture-in-Picture
