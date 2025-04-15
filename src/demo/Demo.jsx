@@ -1,13 +1,11 @@
 import { useRef, useState } from "react";
-import video from "../assets/video.mp4";
 import VideoPlayer from "../VideoPlayer";
 
 function Demo() {
   const videoRef = useRef(null);
-  const [sourceType, setSourceType] = useState("local");
+  const [sourceType, setSourceType] = useState("url");
 
   const sources = {
-    local: video,
     url: "https://res.cloudinary.com/djv2ujxgy/video/upload/v1740465372/courses/67bd6083318babfd4e0805b1/modules/67bd6362318babfd4e0806c7/lessons/u86n2issdtecvvhyahpy.mp4",
     youtube: "https://www.youtube.com/watch?v=NW2jm2t6Zso",
   };
@@ -28,26 +26,22 @@ function Demo() {
         </div>
 
         <div className="flex flex-wrap justify-center gap-4">
-          <button
-            variant={sourceType === "local" ? "default" : "outline"}
-            onClick={() => setSourceType("local")}
-          >
-            Play Local Video
-          </button>
-          <button
-            variant={sourceType === "url" ? "default" : "outline"}
-            onClick={() => setSourceType("url")}
-          >
-            Play URL Video
-          </button>
-          <button
-            variant={sourceType === "youtube" ? "default" : "outline"}
-            onClick={() => setSourceType("youtube")}
-          >
-            Play YouTube Video
-          </button>
+          {sourceType === "youtube" ? (
+            <button
+              className="px-4 py-2 text-white bg-blue-500 rounded-lg shadow"
+              onClick={() => setSourceType("url")}
+            >
+              Play Video
+            </button>
+          ) : (
+            <button
+              className="px-4 py-2 text-white bg-red-500 rounded-lg shadow"
+              onClick={() => setSourceType("youtube")}
+            >
+              Play YouTube Video
+            </button>
+          )}
         </div>
-        <div></div>
       </div>
     </main>
   );
